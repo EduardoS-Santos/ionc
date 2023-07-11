@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
   env = environment;
   private auth: Auth = inject(Auth);
   authState = authState(this.auth);
@@ -19,7 +18,8 @@ export class AppComponent {
     { title: 'Início', url: '/home', icon: 'home' },
     { title: 'Faça Contato', url: '/contacts', icon: 'chatbubbles' },
     { title: 'Sobre', url: '/about', icon: 'information-circle' },
-    { title: 'Sua Privacidade', url: '/policies', icon: 'document-lock' }
+    { title: 'Cadastrar Trecos', url: '/cadastro', icon: 'bag-add-outline' },
+    { title: 'Sua Privacidade', url: '/policies', icon: 'document-lock' },
   ];
 
   public appUser = {
@@ -27,26 +27,27 @@ export class AppComponent {
     title: 'Login / Entrar',
     url: '/login',
     icon: 'log-in',
-    avatar: ''
-  }
+    avatar: '',
+  };
 
   constructor() {
-    this.authStateSubscription = this.authState.subscribe((aUser: User | null) => {
-      if (aUser !== null) {
-        this.appUser = {
-          logged: true,
-          title: aUser.displayName + '',
-          url: '/profile',
-          icon: 'log-out',
-          avatar: aUser.photoURL + ''
+    this.authStateSubscription = this.authState.subscribe(
+      (aUser: User | null) => {
+        if (aUser !== null) {
+          this.appUser = {
+            logged: true,
+            title: aUser.displayName + '',
+            url: '/profile',
+            icon: 'log-out',
+            avatar: aUser.photoURL + '',
+          };
         }
       }
-    })
+    );
   }
 
   ngOnDestroy() {
     // when manually subscribing to an observable remember to unsubscribe in ngOnDestroy
     this.authStateSubscription.unsubscribe();
   }
-
 }

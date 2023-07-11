@@ -1,5 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FieldValue, Firestore, Timestamp, addDoc, collection, serverTimestamp } from '@angular/fire/firestore';
+import {
+  FieldValue,
+  Firestore,
+  Timestamp,
+  addDoc,
+  collection,
+  serverTimestamp,
+} from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,7 +15,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./contacts.page.scss'],
 })
 export class ContactsPage implements OnInit {
-
   public env = environment;
 
   // Modela entidade form.
@@ -19,8 +25,8 @@ export class ContactsPage implements OnInit {
     message: '',
     date: '',
     status: 'received',
-    sended: false
-  }
+    sended: false,
+  };
 
   // Injeta Firestore.
   private firestore: Firestore = inject(Firestore);
@@ -29,33 +35,31 @@ export class ContactsPage implements OnInit {
   // Se a coleção não existe, será criada.
   contactsCollection = collection(this.firestore, 'contacts');
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   sendForm() {
-
     // Valida preenchimento dos campos.
     if (
       this.form.name.length < 3 ||
       this.form.email.indexOf('@') < 1 ||
       this.form.subject.length < 3 ||
       this.form.message.length < 5
-    ) return false;
+    )
+      return false;
 
     // Gera a data atual no formado ISO.
     const d = new Date();
     this.form.date = d.toISOString().split('.')[0].replace('T', ' ');
 
     // Salva contato no Firestore.
-    addDoc(this.contactsCollection, this.form)
-      .then((data) => {
-        console.log('Contato salvo com Id :' + data.id)
-        this.form.sended = true;
-      })
+    addDoc(this.contactsCollection, this.form).then((data) => {
+      console.log('Contato salvo com Id :' + data.id);
+      this.form.sended = true;
+    });
 
     // Encerra sem fazer mais nada.
     return false;
   }
-
 }

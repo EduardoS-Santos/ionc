@@ -4,41 +4,88 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Faça Contato</ion-title>
-    <ion-icon name="chatbubbles" slot="end" size="large" class="ion-margin"></ion-icon>
+    <ion-icon
+      name="chatbubbles"
+      slot="end"
+      size="large"
+      class="ion-margin"
+    ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <div *ngIf="!form.sended">
-
-    <p>Preencha todos os campos abaixo para entrar em contato com a equipe do {{ env.appName }}.</p>
+  <div *ngIf="!cad.sended">
+    <p>Cadastre Seus trecos Aqui</p>
 
     <p>
-      <ion-input label="Nome:" type="text" label-placement="floating" fill="outline" placeholder="Seu nome completo"
-        [autofocus]="true" [(ngModel)]="cad.nameT" error-text="Nome inválido!" required minlength="3"></ion-input>
+      <ion-input
+        label="Nome:"
+        type="text"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Nome completo do item"
+        [autofocus]="true"
+        [(ngModel)]="cad.nameT"
+        error-text="Nome inválido!"
+        required
+        minlength="3"
+      ></ion-input>
     </p>
 
     <p>
-      <ion-input label="Email:" type="text" label-placement="floating" fill="outline" placeholder="Seu e-mail"
-        [(ngModel)]="cad.descriptionT" error-text="E-mail inválido!" required email></ion-input>
+      <ion-input
+        label="Descrição:"
+        type="text"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Descriçao do produto"
+        [(ngModel)]="cad.descriptionT"
+        error-text="Descriçao invalida!"
+        required
+      ></ion-input>
     </p>
 
     <p>
-      <ion-input label="Assunto:" type="text" label-placement="floating" fill="outline" placeholder="Assunto do contato"
-        [(ngModel)]="cad.locationT" error-text="Assunto inválida!" required minlength="3"></ion-input>
+      <ion-input
+        label="Localização:"
+        type="text"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Localização do item"
+        [(ngModel)]="cad.locationT"
+        error-text="Localizaçao inválida!"
+        required
+        minlength="3"
+      ></ion-input>
+    </p>
+    <p>
+      <ion-input
+        label="Status:"
+        type="text"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Status do produto on / off"
+        [(ngModel)]="cad.statusT"
+        error-text="Erro ao preencher Status!"
+        required
+        minlength="2"
+      ></ion-input>
     </p>
 
     <p>
-      <ion-button type="submit" (click)="sendTreco()">Enviar</ion-button>
+      <ion-button type="submit" (click)="sendTreco()" id="present-alert"
+        >Enviar</ion-button
+      >
     </p>
-
   </div>
 
-  <div *ngIf="form.sended">
-    <h4>Olá {{ form.name }}!</h4>
-    <p>Seu contato foi enviado com sucesso.</p>
-    <p><em>Obrigado...</em></p>
+  <div *ngIf="cad.sended">
+    <h4>Treco cadastrado com sucesso!</h4>
+    <p>clique no botao para cadastrar outro</p>
+    <p>
+      <ion-button type="submit" (click)="refresh()" id="present-alert"
+        >Refresh</ion-button
+      >
+    </p>
   </div>
-
 </ion-content>
