@@ -17,11 +17,11 @@ export class CadastroPage implements OnInit {
   public env = environment;
   public alertButtons = ['OK'];
   public cad = {
-    nameT: '',
-    descriptionT: '',
-    locationT: '',
-    dateT: 'received',
-    statusT: '',
+    name: '',
+    description: '',
+    location: '',
+    date: 'received',
+    status: '',
     sended: false,
   };
 
@@ -31,18 +31,18 @@ export class CadastroPage implements OnInit {
 
   ngOnInit() {}
 
-  cadastroCollection = collection(this.firestore, 'Trecos');
+  cadastroCollection = collection(this.firestore, 'things');
 
   sendTreco() {
     if (
-      this.cad.nameT.length < 3 ||
-      this.cad.descriptionT.length < 5 ||
-      this.cad.locationT.length < 10
+      this.cad.name.length < 3 ||
+      this.cad.description.length < 5 ||
+      this.cad.location.length < 10
     )
       return false;
 
     const d = new Date();
-    this.cad.dateT = d.toISOString().split('.')[0].replace('T', ' ');
+    this.cad.date = d.toISOString().split('.')[0].replace('T', ' ');
 
     addDoc(this.cadastroCollection, this.cad).then((data) => {
       console.log('Contato salvo com id' + data.id);
@@ -53,10 +53,10 @@ export class CadastroPage implements OnInit {
 
   refresh() {
     this.cad.sended = false;
-    this.cad.nameT = '';
-    this.cad.descriptionT = '';
-    this.cad.locationT = '';
-    this.cad.statusT = '';
-    this.cad.dateT = 'received';
+    this.cad.name = '';
+    this.cad.description = '';
+    this.cad.location = '';
+    this.cad.status = '';
+    this.cad.date = 'received';
   }
 }
