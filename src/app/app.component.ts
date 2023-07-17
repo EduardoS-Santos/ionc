@@ -18,7 +18,7 @@ export class AppComponent {
     { title: 'Início', url: '/home', icon: 'home' },
     { title: 'Faça Contato', url: '/contacts', icon: 'chatbubbles' },
     { title: 'Sobre', url: '/about', icon: 'information-circle' },
-    { title: 'Cadastrar Trecos', url: '/cadastro', icon: 'bag-add-outline' },
+    { title: 'Cadastrar Trecos', url: '/cadastro', icon: 'bag-add' },
     { title: 'Sua Privacidade', url: '/policies', icon: 'document-lock' },
   ];
 
